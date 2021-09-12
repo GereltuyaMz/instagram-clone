@@ -1,18 +1,59 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import "./style.css";
+import { useHistory } from "react-router-dom";
+
+const baseURL = "http://localhost:5000/login";
 
 const SignIn = () => {
+	const history = useHistory();
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
+	const login = () => {
+		axios
+			.post(baseURL, {
+				email: email,
+				password: password,
+			})
+			.then((response) => {
+				console.log("response =", response);
+				history.push("/profile");
+			});
+	};
+
+	// const handleSubmit = (e: any) => {
+	// 	e.preventDefault();
+	// };
+
+	// const validateForm = () => {
+	// 	return username.length > 0 && password.length > 0;
+	// };
+
 	return (
 		<div className="container">
 			<div className="border">
 				<h1>Instagram</h1>
 				<form className="form">
-					<input placeholder="username or email" type="email" className="username" />
-					{/* <label className="label">Username</label> */}
-					<input placeholder="password" type="password" id="password" />
+					<input
+						placeholder="username or email"
+						type="email"
+						className="username"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+					<input
+						placeholder="password"
+						type="password"
+						id="password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
 				</form>
-				<button>Log In</button>
+				<button type="submit" onClick={login}>
+					Log In
+				</button>
 				<div>
 					<a href="#" className="forgot">
 						Forgot password?
@@ -21,7 +62,7 @@ const SignIn = () => {
 			</div>
 			<div className="sign-up">
 				<span>Don't have an account?</span>
-				<Link to="/auth/SignUp" style={{ textDecoration: "none" }}>
+				<Link to="/signup" style={{ textDecoration: "none" }}>
 					<span className="link">&nbsp;Sign up</span>
 				</Link>
 			</div>
