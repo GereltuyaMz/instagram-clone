@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./style.css";
-import { useHistory } from "react-router-dom";
 
 const baseURL = "http://localhost:5000/login";
 
@@ -19,16 +18,12 @@ const SignIn = () => {
 			})
 			.then((response) => {
 				console.log("response =", response);
-				history.push("/profile");
+				history.push("/feed");
 			});
 	};
 
 	// const handleSubmit = (e: any) => {
 	// 	e.preventDefault();
-	// };
-
-	// const validateForm = () => {
-	// 	return username.length > 0 && password.length > 0;
 	// };
 
 	return (
