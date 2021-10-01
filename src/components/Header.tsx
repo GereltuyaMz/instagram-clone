@@ -28,20 +28,20 @@ export const Header = () => {
 				color="#8e8e8e"
 			/>
 			<input type="text" id="search" placeholder="Search" />
-			<IconContext.Provider value={{ className: "icons" }}>
-				<div className="header-icons">
-					<Link to="/feed" className="link">
+			<IconContext.Provider value={{ className: "header-icons" }}>
+				<div className="icons">
+					<Link to="/feed" className="page-link">
 						<AiOutlineHome />
 					</Link>
 					<RiMessengerLine />
-					<Link to="/discover" className="link">
+					<Link to="/discover" className="page-link">
 						<AiOutlineCompass />
 					</Link>
 					<AiOutlineHeart />
-					<Link to="/profile" className="link">
+					<Link to="/profile" className="page-link">
 						<AiOutlineProfile />
 					</Link>
-					<AiOutlineLogout onClick={logout} />
+					<AiOutlineLogout onClick={logout} className="page-link" />
 				</div>
 			</IconContext.Provider>
 		</nav>

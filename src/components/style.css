@@ -24,17 +24,17 @@
 }
 
 .header-icons {
+	cursor: pointer;
+	font-size: 1.7em;
+}
+
+.icons {
 	display: flex;
 	justify-content: space-evenly;
 	width: 16%;
 }
 
-.icons {
-	cursor: pointer;
-	font-size: 1.7em;
-}
-
-.link:visited {
+.page-link:visited {
 	color: black;
 }
 
@@ -54,6 +54,7 @@
 	align-items: center;
 }
 
+/* post-card */
 .post-header {
 	display: flex;
 	align-items: center;
