@@ -6,31 +6,21 @@ import Feed from "./pages/feed/index";
 import Discover from "./pages/discover/index";
 import { Header } from "./components";
 
-// const Main = () => {
-// 	if (!user) {
-// 		return <SignIn>
-// 	}else{
-// 				<Timeline>
-
-// 		</Timeline>
-// 	}
-// }
-
-/* if(signedned<Header></Header>
-			<Main></Main> */
-
 function App() {
 	return (
 		<>
 			<Header />
 			<Switch>
-				{/* <Route path="/" exact={true}>
-				<SignIn />
-			</Route>
-			<Route path="/signup" exact={true}>
-				<SignUp />
-			</Route> */}
 				<Route path="/" exact={true}>
+					{sessionStorage.getItem("user") !== null ? <Feed /> : <SignIn />}
+				</Route>
+				<Route path="/signin" exact={true}>
+					<SignIn />
+				</Route>
+				<Route path="/signup" exact={true}>
+					<SignUp />
+				</Route>
+				<Route path="/feed" exact={false}>
 					<Feed />
 				</Route>
 				<Route path="/discover" exact={true}>

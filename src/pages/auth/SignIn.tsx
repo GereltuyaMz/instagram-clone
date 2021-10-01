@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
-import "./style.css";
+import "../css/style.css";
 
-const baseURL = "http://localhost:5000/login";
+const baseURL = process.env.REACT_APP_BACKEND_URL;
+
 
 const SignIn = () => {
 	const history = useHistory();
@@ -12,19 +13,21 @@ const SignIn = () => {
 
 	const login = () => {
 		axios
-			.post(baseURL, {
+			.post(`${baseURL}/login`, {
 				email: email,
 				password: password,
 			})
 			.then((response) => {
 				console.log("response =", response);
-				history.push("/feed");
+				//successful login, save jwt token -- for now let's use session storage
+				//useUser => use context to save user
+				sessionStorage.setItem("user", JSON.stringify(response));
+				history.push("/");
+			})
+			.catch((error) => {
+				console.error(error);
 			});
 	};
-
-	// const handleSubmit = (e: any) => {
-	// 	e.preventDefault();
-	// };
 
 	return (
 		<div className="container">
@@ -33,15 +36,12 @@ const SignIn = () => {
 				<form className="form">
 					<input
 						placeholder="username or email"
-						type="email"
-						className="username"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 					/>
 					<input
 						placeholder="password"
 						type="password"
-						id="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>

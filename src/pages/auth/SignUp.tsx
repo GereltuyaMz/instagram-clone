@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./style.css";
+import "../css/style.css";
 import { useHistory } from "react-router-dom";
 
-const baseURL = "http://localhost:5000/register";
+//move base url to .env file
+//baseUrl = process.env.BACKEND_URL +
+
+const baseURL = process.env.REACT_APP_BACKEND_URL;
 
 const SignUp = () => {
 	const history = useHistory();
@@ -12,15 +15,19 @@ const SignUp = () => {
 	const [password, setPassword] = useState("");
 
 	const register = () => {
+		//create axios wrapper if necessary
 		axios
-			.post(baseURL, {
+			.post(`${baseURL}/register`, {
 				email: email,
 				username: username,
 				password: password,
 			})
 			.then((response) => {
 				console.log("Sign up success!!", response);
-				history.push('/');
+				history.push("/");
+			})
+			.catch((error) => {
+				console.error(error);
 			});
 	};
 
@@ -31,27 +38,21 @@ const SignUp = () => {
 				<form className="form">
 					<input
 						placeholder="Email"
-						type="email"
-						id="email"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 					/>
 					<input
 						placeholder="Username"
-						type="text"
-						id="username"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 					/>
 					<input
 						placeholder="Password"
 						type="password"
-						id="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 				</form>
-
 				<button className="button" onClick={register}>
 					Sign Up
 				</button>
